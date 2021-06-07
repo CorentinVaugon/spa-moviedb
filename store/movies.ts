@@ -122,5 +122,10 @@ export const mutations: MutationTree<MovieState> = {
 // GETTERS
 export const getters: GetterTree<MovieState, MovieState> = {
   loading: state => state.loading,
-  selectedMovies: (state) => state.selectedMovies
+  selectedMovies: (state) => state.selectedMovies,
+  getGenre: (state) => (id: number) => {
+    const index = state.genres.findIndex((genre) => genre.id === id)
+
+    return state.genres[index].name
+  }
 }

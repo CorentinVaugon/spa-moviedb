@@ -46,6 +46,10 @@ export default {
     '@nuxtjs/bulma'
   ],
 
+  axios: {
+    baseURL: 'https://api.themoviedb.org/3'
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

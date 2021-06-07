@@ -37,12 +37,10 @@ export default defineComponent({
     const disabledButton: Ref<boolean> = computed(() => search.value === '')
 
     function updateSearch(payload: {search: string}){
-      console.log(payload)
       search.value = payload.search
     }
 
     function updateYear(payload: {year: number | null}) {
-      console.log(payload)
       year.value = payload.year
     }
 
