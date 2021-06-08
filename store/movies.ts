@@ -123,9 +123,15 @@ export const mutations: MutationTree<MovieState> = {
 export const getters: GetterTree<MovieState, MovieState> = {
   loading: state => state.loading,
   selectedMovies: (state) => state.selectedMovies,
+  // Check if our page is already available into our movies
+  moviesAreAlreadyLoaded: (state) => (page: number) => {
+    return typeof state.movies[page-1] !== 'undefined'
+  },
   getGenre: (state) => (id: number) => {
     const index = state.genres.findIndex((genre) => genre.id === id)
 
     return state.genres[index].name
-  }
+  },
+  totalPages: (state) => state.totalPages,
+  currentPage: (state) => state.currentPage
 }
