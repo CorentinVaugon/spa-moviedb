@@ -60,8 +60,7 @@ export default defineComponent({
     },
 
     posterPath: {
-      type: String,
-      required: true
+      type: String
     },
 
     genres: {
@@ -71,8 +70,8 @@ export default defineComponent({
   },
 
   setup() {
-    function fetchImage(path: string): string {
-      return `https://image.tmdb.org/t/p/w200/${path}`
+    function fetchImage(path: string | null): string {
+      return path ? `https://image.tmdb.org/t/p/w200/${path}` : 'https://via.placeholder.com/200x300'
     }
 
     return {

@@ -8,5 +8,5 @@ export interface MoviesCollection {
   voteAverage: number,
   releaseDate: string,
   genres: Array<number>,
-  posterPath: string
+  posterPath: string | null
 }
