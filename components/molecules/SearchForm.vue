@@ -1,14 +1,17 @@
 <template>
   <form>
-    <input-text-search 
+    <input-text-search
+      class="input-text-search"
       @update:search="updateSearch"
     />
 
     <select-year
+      class="select-year"
       @update:year="updateYear"
     />
     
     <validation-button 
+      class="validation-button"
       :disabled="disabledButton"
       @do:actionToSearch="fetchSearch"
     />
@@ -68,3 +71,15 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="sass" scoped>
+form
+  padding: 1rem 0px
+  display: flex
+
+  .input-text-search
+    width: 60%
+    margin-right: 1rem
+
+  .select-year
+    margin-right: 1rem
+</style>
