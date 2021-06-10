@@ -6,7 +6,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint": "eslint store/*ts components/**/*.vue layouts/*vue types/*.ts"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.5",
