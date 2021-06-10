@@ -18,3 +18,16 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+## Ideas to improve code and UI
+- Style
+    - Responsive CSS
+    - Use different color for each genres tag
+
+- Code & Features
+    - Use a Javascript Class for calling API
+    - Add new filter like genre or include adult content
+
+- Lint
+    - Improve lint rules
