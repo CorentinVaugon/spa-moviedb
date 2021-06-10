@@ -1,16 +1,10 @@
 <template>
   <div>
     <div v-if="loading">
-      loading
+      <loader />
     </div>
     <div v-else>
-      <pagination v-if="totalPages > 1"
-        :total-pages="totalPages"
-        :current-page="currentPage"
-        @update:page="updatePage"  
-      />
-
-      <div v-if="movies !== null" class="columns is-multiline">
+      <div v-if="movies.length > 0" class="columns is-multiline">
         <div class="column is-4"
           v-for="(movie, index) in movies"
           :key="index"
@@ -24,6 +18,19 @@
           />
         </div>
       </div>
+
+      <notification 
+        v-if="movies.length === 0 && noResult"
+        message="No movies found through your search" 
+        color="danger" 
+      />
+
+      <pagination v-if="totalPages > 1"
+        class="pagination"
+        :total-pages="totalPages"
+        :current-page="currentPage"
+        @update:page="updatePage"  
+      />
     </div>
   </div>
 </template>
@@ -31,6 +38,9 @@
 import { defineComponent, computed, Ref, ref, useStore } from '@nuxtjs/composition-api'
 
 import { MoviesCollection } from '~/types/movies'
+
+import Notification from '~/components/atoms/Notification.vue'
+import Loader from '~/components/atoms/Loader.vue'
 
 import CardMovie from '~/components/molecules/CardMovie.vue'
 import Pagination from '~/components/molecules/Pagination.vue'
@@ -40,7 +50,9 @@ export default defineComponent({
 
   components: {
     CardMovie,
-    Pagination
+    Pagination,
+    Notification,
+    Loader
   },
 
   setup() {
@@ -51,9 +63,9 @@ export default defineComponent({
     const totalPages: Ref<number> = computed(() => store.getters['movies/totalPages'])
     const currentPage: Ref<number> = computed(() => store.getters['movies/currentPage'])
 
-    const movies: Ref<Array<MoviesCollection> | null> = computed(() => {
-      return store.getters['movies/selectedMovies'].length > 0 ? store.getters['movies/selectedMovies'] : null
-    })
+    const movies: Ref<Array<MoviesCollection> | null> = computed(() => store.getters['movies/selectedMovies'])
+
+    const noResult: Ref<boolean> = computed(() => store.getters['movies/noResult'])
 
     async function updatePage(page: number) {
       // Store current page
@@ -62,7 +74,7 @@ export default defineComponent({
       // use api call only if our page is not already loaded
       if(!store.getters['movies/moviesAreAlreadyLoaded'](page)) {
         // Get movies by search
-      await store.dispatch('movies/searchMovies')
+        await store.dispatch('movies/searchMovies')
       }
 
       // Set selected Page
@@ -72,6 +84,7 @@ export default defineComponent({
     return {
       loading,
       movies,
+      noResult,
 
       totalPages,
       currentPage,
@@ -80,3 +93,7 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="sass" scoped>
+.pagination
+  margin-top: 1rem
+</style>

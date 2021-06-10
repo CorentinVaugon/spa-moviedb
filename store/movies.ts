@@ -9,6 +9,7 @@ export interface MovieStore {
   genres: Array<GenreCollection>,
   totalPages: number,
   movies: Array<Array<MoviesCollection>>,
+  noResult: boolean,
   selectedMovies: Array<MoviesCollection>
   loading: boolean
 }
@@ -21,6 +22,7 @@ export const state = (): MovieStore => ({
   totalPages: 0,
   // Be carefull, we start our array to 0
   movies: [] as Array<Array<MoviesCollection>>,
+  noResult: false,
   selectedMovies: [] as Array<MoviesCollection>,
   loading: false
 })
@@ -42,6 +44,9 @@ export const actions: ActionTree<MovieState, MovieState> = {
   },
 
   async searchMovies({commit, state}) {
+    // Loading to true
+    commit('TOGGLE_LOADING')
+
     let url = `/search/movie?api_key=6948df1a72108e13f66535dd34a459ec&query=${state.search}&page=${state.currentPage}`
 
     if (state.year !== null) {
@@ -65,8 +70,14 @@ export const actions: ActionTree<MovieState, MovieState> = {
         genres: movie.genre_ids
       }
     })
+
+    // Set no result
+    movies.length === 0 ? commit('SET_NO_RESULT', true) : commit('SET_NO_RESULT', false)
     
     commit('SET_MOVIES_BY_PAGE', movies)
+
+    // Loading to false
+    commit('TOGGLE_LOADING')
   },
 
   setSearchDatas({commit}, searchData: {search: string, year: number | null}) {
@@ -101,6 +112,14 @@ export const mutations: MutationTree<MovieState> = {
     state.totalPages = totalPages
   },
 
+  SET_NO_RESULT(state, noResult: boolean) {
+    state.noResult = noResult
+  },
+
+  TOGGLE_LOADING(state) {
+    state.loading = !state.loading
+  },
+
   REINIT_STATE(state) {
     state.search = ''
     state.year = null
@@ -122,6 +141,7 @@ export const mutations: MutationTree<MovieState> = {
 // GETTERS
 export const getters: GetterTree<MovieState, MovieState> = {
   loading: state => state.loading,
+  noResult: state => state.noResult,
   selectedMovies: (state) => state.selectedMovies,
   // Check if our page is already available into our movies
   moviesAreAlreadyLoaded: (state) => (page: number) => {
