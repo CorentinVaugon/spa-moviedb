@@ -1,12 +1,29 @@
 <template>
-  <div class="select is-normal">
-    <select v-model="year">
-      <option v-for="year in availableYear" 
-        :key="year" 
-        :value="year">
-        {{year}}
-      </option>
-    </select>
+  <div>
+    <label
+      for="selectYear"
+      class="is-block"
+    >
+      Select Year
+    </label>
+
+    <div class="select is-normal">
+      <select
+        id="selectYear"
+        v-model="year"
+      >
+        <option
+          :value="null"
+        >
+          Any
+        </option>
+        <option v-for="year in availableYear" 
+          :key="year" 
+          :value="year">
+          {{year}}
+        </option>
+      </select>
+    </div>
   </div>
 </template>
 <script lang="ts">

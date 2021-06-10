@@ -1,9 +1,17 @@
 <template>
-  <input v-model="search" 
-    class="input" 
-    type="text" 
-    placeholder="Enter your search"
-  />
+  <div>
+    <label
+      for="searchInput"
+    >
+      Search
+    </label>
+    <input v-model="search"
+      id="searchInput"
+      class="input" 
+      type="text" 
+      placeholder="Enter your search"
+    />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, Ref, ref, watch } from '@nuxtjs/composition-api'

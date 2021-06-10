@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="searching-movies">
     <search-form 
       @get:search-data="callApi"
     />
@@ -51,3 +51,7 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="sass" scoped>
+.searching-movies
+  margin-bottom: 1rem
+</style>

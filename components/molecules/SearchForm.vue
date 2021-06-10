@@ -75,6 +75,7 @@ export default defineComponent({
 form
   padding: 1rem 0px
   display: flex
+  align-items: flex-end
 
   .input-text-search
     width: 60%
