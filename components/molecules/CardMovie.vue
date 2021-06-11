@@ -6,6 +6,8 @@
           <div class="column">
             <h3>{{title}}</h3>
             
+            <p class="text">{{releaseDate}}</p>
+            
             <vote-average 
               :vote-average="voteAverage"
             />
