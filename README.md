@@ -1,5 +1,16 @@
 # spa-moviedb
 
+This project is a movie search tool. You can search by word and year of available. it use [Movie DB](https://www.themoviedb.org/), you can check the documentation [here](https://developers.themoviedb.org/3/getting-started/introduction)
+
+# First step
+Create a .env file and copy/paste this code, use your own API Key.
+
+```bash
+# .env
+MOVIEDB_API_URL = 'https://api.themoviedb.org/3'
+MOVIEDB_KEY = <YOUR API KEY>
+```
+
 ## Build Setup
 
 ```bash
