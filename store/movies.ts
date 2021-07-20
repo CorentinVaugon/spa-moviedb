@@ -34,7 +34,7 @@ export type MovieState = ReturnType<typeof state>
 export const actions: ActionTree<MovieState, MovieState> = {
   async init({commit}) {
     // Get genres
-    const result = await this.$axios.get('/genre/movie/list?api_key=6948df1a72108e13f66535dd34a459ec')
+    const result = await this.$axios.get(`/genre/movie/list?api_key=${process.env.apiKey}`)
 
     commit('INIT_GENRES', result.data.genres)
   },
@@ -47,7 +47,7 @@ export const actions: ActionTree<MovieState, MovieState> = {
     // Loading to true
     commit('TOGGLE_LOADING')
 
-    let url = `/search/movie?api_key=6948df1a72108e13f66535dd34a459ec&query=${state.search}&page=${state.currentPage}`
+    let url = `/search/movie?api_key=${process.env.apiKey}&query=${state.search}&page=${state.currentPage}`
 
     if (state.year !== null) {
       url += `&year=${state.year}`

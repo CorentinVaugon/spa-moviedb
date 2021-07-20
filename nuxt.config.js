@@ -47,7 +47,11 @@ export default {
   ],
 
   axios: {
-    baseURL: 'https://api.themoviedb.org/3'
+    baseURL: process.env.MOVIEDB_API_URL || 'https://api.themoviedb.org/3'
+  },
+
+  env: {
+    apiKey: process.env.MOVIEDB_KEY
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
